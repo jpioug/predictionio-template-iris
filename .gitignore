@@ -1,0 +1,10 @@
+manifest.json
+pio.log
+/pio.sbt
+target/
+.idea
+.ipynb_checkpoints/
+Untitled.ipynb
+data/iris.data
+derby.log
+metastore_db/

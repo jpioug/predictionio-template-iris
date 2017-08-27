@@ -1,0 +1,18 @@
+{
+  "id": "default",
+  "description": "Default settings",
+  "engineFactory": "org.example.classification.ClassificationEngine",
+  "datasource": {
+    "params": {
+      "appName": "IRIS_TOKEN"
+    }
+  },
+  "algorithms": [
+    {
+      "name": "naive",
+      "params": {
+        "lambda": 1.0
+      }
+    }
+  ]
+}
