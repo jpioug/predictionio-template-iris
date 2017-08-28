@@ -1,6 +1,7 @@
 package org.jpioug.template.iris
 
 import org.apache.predictionio.controller.{Engine, EngineFactory}
+import org.jpioug.template.python.{DataSource, Preparator, Serving}
 
 case class Query(attr0: Double,
                  attr1: Double,
@@ -14,7 +15,7 @@ object Engine extends EngineFactory {
     new Engine(
       classOf[DataSource],
       classOf[Preparator],
-      Map("algo" -> classOf[Algorithm]),
+      Map("default" -> classOf[Algorithm]),
       classOf[Serving])
   }
 }

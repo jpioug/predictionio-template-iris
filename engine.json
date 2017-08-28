@@ -9,9 +9,9 @@
   },
   "algorithms": [
     {
-      "name": "algo",
+      "name": "default",
       "params": {
-        "model_path": "/tmp/iris-model"
+        "name": "IrisApp"
       }
     }
   ]

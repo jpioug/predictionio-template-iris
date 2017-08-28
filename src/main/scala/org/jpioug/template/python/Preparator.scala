@@ -1,4 +1,4 @@
-package org.jpioug.template.iris
+package org.jpioug.template.python
 
 import org.apache.predictionio.controller.PPreparator
 import org.apache.spark.SparkContext

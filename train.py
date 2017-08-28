@@ -118,11 +118,15 @@ print("Test Error = %g" % (1.0 - accuracy))
 # In[ ]:
 
 
-model.save('/tmp/iris-rf.model')
+model.save('/tmp/iris-model')
 
 
 # In[ ]:
 
-
-
+import sys
+from pypio.utils import new_string_array
+main_args = new_string_array(sys.argv, sc._gateway)
+create_workflow = sc._jvm.org.apache.predictionio.workflow.CreateWorkflow
+sc.stop()
+create_workflow.main(main_args)
 
