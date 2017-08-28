@@ -1,8 +1,9 @@
-package org.example.classification
+package org.jpioug.template.iris
 
 import org.apache.predictionio.controller.LServing
 
-class Serving extends LServing[Query, PredictedResult] {
+class Serving
+  extends LServing[Query, PredictedResult] {
 
   override
   def serve(query: Query,

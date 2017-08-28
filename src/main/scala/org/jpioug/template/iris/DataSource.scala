@@ -1,0 +1,18 @@
+package org.jpioug.template.iris
+
+import org.apache.predictionio.controller.{EmptyActualResult, EmptyEvaluationInfo, PDataSource, Params}
+import org.apache.spark.SparkContext
+
+case class DataSourceParams(appName: String) extends Params
+
+class DataSource(val dsp: DataSourceParams)
+  extends PDataSource[TrainingData,
+    EmptyEvaluationInfo, Query, EmptyActualResult] {
+
+  override
+  def readTraining(sc: SparkContext): TrainingData = {
+    new TrainingData()
+  }
+}
+
+class TrainingData() extends Serializable {}
