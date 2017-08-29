@@ -1,17 +1,21 @@
 # coding: utf-8
 
+### BEGIN: SETUP ###
 import atexit
 import platform
 
 import py4j
+import sys
 
 import pyspark
 from pyspark.context import SparkContext
 from pyspark.sql import SparkSession, SQLContext
 from pyspark.storagelevel import StorageLevel
+from pypio.utils import new_string_array
+from pypio.data import PEventStore
+
 
 SparkContext._ensure_initialized()
-
 try:
     SparkContext._jvm.org.apache.hadoop.hive.conf.HiveConf()
     spark = SparkSession.builder.enableHiveSupport().getOrCreate()
@@ -27,9 +31,18 @@ atexit.register(lambda: sc.stop())
 sqlContext = spark._wrapped
 sqlCtx = sqlContext
 
-from pypio.data import PEventStore
-
 p_event_store = PEventStore(spark._jsparkSession, sqlContext)
+
+
+def run_pio_workflow(model):
+    template_engine = sc._jvm.org.jpioug.template.python.Engine
+    template_engine.modelRef().set(model._to_java())
+    main_args = new_string_array(sys.argv, sc._gateway)
+    create_workflow = sc._jvm.org.apache.predictionio.workflow.CreateWorkflow
+    sc.stop()
+    create_workflow.main(main_args)
+
+### END: SETUP ###
 
 # In[ ]:
 
@@ -117,18 +130,5 @@ print("Test Error = %g" % (1.0 - accuracy))
 
 # In[ ]:
 
-
-#model.save('/tmp/iris-model')
-
-
-# In[ ]:
-
-import sys
-from pypio.utils import new_string_array
-template_engine = sc._jvm.org.jpioug.template.python.Engine
-template_engine.modelRef().set(model._to_java())
-main_args = new_string_array(sys.argv, sc._gateway)
-create_workflow = sc._jvm.org.apache.predictionio.workflow.CreateWorkflow
-sc.stop()
-create_workflow.main(main_args)
+run_pio_workflow(model)
 

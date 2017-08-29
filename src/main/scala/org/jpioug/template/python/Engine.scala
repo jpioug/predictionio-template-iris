@@ -8,7 +8,7 @@ import org.jpioug.template.iris.Algorithm
 
 object Engine extends EngineFactory {
 
-  val modelRef: AtomicReference[PipelineModel] = new AtomicReference[PipelineModel]()
+  val modelRef: AtomicReference[PipelineModel] = new AtomicReference[PipelineModel]
 
   def apply() = {
     new Engine(
