@@ -118,13 +118,15 @@ print("Test Error = %g" % (1.0 - accuracy))
 # In[ ]:
 
 
-model.save('/tmp/iris-model')
+#model.save('/tmp/iris-model')
 
 
 # In[ ]:
 
 import sys
 from pypio.utils import new_string_array
+template_engine = sc._jvm.org.jpioug.template.python.Engine
+template_engine.modelRef().set(model._to_java())
 main_args = new_string_array(sys.argv, sc._gateway)
 create_workflow = sc._jvm.org.apache.predictionio.workflow.CreateWorkflow
 sc.stop()

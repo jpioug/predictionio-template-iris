@@ -1,22 +1,25 @@
 package org.jpioug.template.iris
 
-import grizzled.slf4j.Logger
 import org.apache.predictionio.controller.{P2LAlgorithm, Params}
 import org.apache.spark.SparkContext
 import org.apache.spark.ml.PipelineModel
 import org.apache.spark.sql.SparkSession
-import org.jpioug.template.python.{ModelState, PreparedData}
+import org.jpioug.template.python.{Engine, PreparedData}
 
 case class AlgorithmParams(name: String) extends Params
+
+case class Query(attr0: Double,
+                 attr1: Double,
+                 attr2: Double,
+                 attr3: Double)
+
+case class PredictedResult(label: String) extends Serializable
 
 class Algorithm(val ap: AlgorithmParams)
   extends P2LAlgorithm[PreparedData, PipelineModel, Query, PredictedResult] {
 
-  @transient lazy val logger = Logger[this.type]
-
   def train(sc: SparkContext, data: PreparedData): PipelineModel = {
-// TODO ModelState.get[PipelineModel]
-    None
+    Engine.modelRef.get()
   }
 
   def predict(model: PipelineModel, query: Query): PredictedResult = {

@@ -14,6 +14,12 @@ pio app new --access-key IRIS_TOKEN IrisApp
 python data/import_eventserver.py
 ```
 
+### Build Template
+
+```
+pio build
+```
+
 ### Run Jupyter
 
 ```

@@ -1,7 +1,7 @@
 {
   "id": "default",
   "description": "Default settings",
-  "engineFactory": "org.jpioug.template.iris.Engine",
+  "engineFactory": "org.jpioug.template.python.Engine",
   "datasource": {
     "params": {
       "appName": "IRIS_TOKEN"

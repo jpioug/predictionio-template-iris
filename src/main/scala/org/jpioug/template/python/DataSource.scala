@@ -10,8 +10,7 @@ class DataSource(val dsp: DataSourceParams)
   extends PDataSource[TrainingData,
     EmptyEvaluationInfo, Query, EmptyActualResult] {
 
-  override
-  def readTraining(sc: SparkContext): TrainingData = {
+  override def readTraining(sc: SparkContext): TrainingData = {
     new TrainingData()
   }
 }
