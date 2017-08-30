@@ -25,7 +25,6 @@ class Algorithm(val ap: AlgorithmParams)
   def predict(model: PipelineModel, query: Query): PredictedResult = {
     val spark = SparkSession
       .builder
-      .appName(ap.name)
       .getOrCreate()
     import spark.implicits._
     val data = Seq(
