@@ -4,7 +4,7 @@
   "engineFactory": "org.jpioug.template.python.Engine",
   "datasource": {
     "params": {
-      "appName": "IRIS_TOKEN"
+      "appName": "IrisApp"
     }
   },
   "algorithms": [
