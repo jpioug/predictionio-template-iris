@@ -1,0 +1,44 @@
+version: '2'
+services:
+  elasticsearch1:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.4
+    container_name: elasticsearch1
+    environment:
+      - xpack.graph.enabled=false
+      - xpack.ml.enabled=false
+      - xpack.monitoring.enabled=false
+      - xpack.security.enabled=false
+      - xpack.watcher.enabled=false
+      - cluster.name=elasticsearch
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 2g
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+    networks:
+      - esnet
+  pio:
+    image: jpioug/pio-setup:latest
+    environment:
+      - PIO_MODE=$PIO_MODE
+    depends_on:
+      - elasticsearch1
+    volumes:
+      - ./:/work
+    ports:
+      - 7070:7070
+      - 8000:8000
+      - 8888:8888
+    networks:
+      - esnet
+
+volumes:
+  esdata1:
+    driver: local
+
+networks:
+  esnet:

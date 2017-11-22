@@ -26,7 +26,11 @@ except TypeError:
 
 sc = spark.sparkContext
 sql = spark.sql
-atexit.register(lambda: sc.stop())
+def pio_cleanup():
+    sc.stop()
+    sc._jvm.org.apache.predictionio.workflow.CleanupFunctions.run()
+atexit.register(pio_cleanup)
+
 
 sqlContext = spark._wrapped
 sqlCtx = sqlContext
