@@ -63,3 +63,31 @@ Check predictions from deployed model:
 curl -s -H "Content-Type: application/json" -d '{"attr0":5.1,"attr1":3.5,"attr2":1.4,"attr3":0.2}' http://localhost:8000/queries.json
 ```
 
+## Run on Docker
+
+[PredictionIO Setup](https://github.com/jpioug/predictionio-setup) dockernizes PredictionIO Template project easily and provides All-In-One environment for train and deploy processes.
+
+### Run Train Steps on Docker
+
+`train` mode executes create-app, import-data, build and train process.
+
+```
+PIO_MODE=train docker-compose up --abort-on-container-exit
+```
+
+### Run Deploy Step on Docker
+
+`deploy` mode starts Rest API on Docker container.
+
+```
+PIO_MODE=deploy docker-compose up --abort-on-container-exit
+```
+
+and then check a prediction:
+
+```
+curl -s -H "Content-Type: application/json" -d '{"attr0":5.1,"attr1":3.5,"attr2":1.4,"attr3":0.2}' http://localhost:8000/queries.json
+```
+
+
+
