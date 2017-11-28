@@ -22,7 +22,7 @@ services:
     networks:
       - esnet
   pio:
-    image: jpioug/pio-setup:latest
+    image: jpioug/pio-setup:1.1.2
     environment:
       - PIO_MODE=$PIO_MODE
     depends_on:
